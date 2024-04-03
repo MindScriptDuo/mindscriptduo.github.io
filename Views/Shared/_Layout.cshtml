@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SportUniTrack</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SportUniTrack.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Спортна зала ПУ</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Правила за ползване</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStudents" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Студенти
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownStudents">
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "Equipments")">Наличности</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "Sports")">Видове спорт</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTeachers" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Преподаватели
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownTeachers">
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "ApplicationUsers")">Потребители</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "Borrowings")">Наеми</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "Equipments")">Наличности</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Футър с контактна информация -->
+    <footer class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Контакти</h4>
+                    <ul>
+                        <li>Адрес: Северен, бул. „България“ 236А, 4027 Пловдив</li>
+                        <li>Телефон: 032 261 261</li>
+                        <li>Имейл: info@sportzala.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4>Работно време</h4>
+                    <p>Понеделник - Петък: 08:00 - 20:00 ч.</p>
+                    <p>Събота - Неделя: 09:00 - 18:00 ч.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
